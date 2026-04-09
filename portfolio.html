@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jagdish Joshi - Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e17;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --border: #1e2d45;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --green: #10b981;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(10,14,23,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+    padding: 1rem 0;
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+  .nav-logo { font-family: var(--mono); color: var(--accent); font-size: 0.95rem; letter-spacing: 0.05em; }
+  .nav-logo span { color: var(--muted); }
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 0.85rem; font-family: var(--mono); letter-spacing: 0.05em; transition: color 0.2s; }
+  nav a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 6rem 0 4rem;
+  }
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .hero-tag::before { content: ''; display: block; width: 2rem; height: 1px; background: var(--accent); }
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+  h1 .name-accent { color: var(--accent); }
+  .hero-subtitle {
+    font-family: var(--mono);
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .hero-subtitle .cursor {
+    display: inline-block;
+    width: 2px; height: 1.1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+  .hero-desc {
+    max-width: 540px;
+    color: var(--muted);
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0e17;
+    border: 1px solid var(--accent);
+    font-weight: 700;
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+  .stat-num {
+    font-size: 1.8rem; font-weight: 800;
+    color: var(--accent);
+    font-family: var(--mono);
+    display: block;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); font-family: var(--mono); letter-spacing: 0.1em; }
+
+  /* SECTIONS */
+  section { padding: 5rem 0; }
+  .section-tag {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-size: 2rem; font-weight: 800;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+  h2 span { color: var(--muted); font-size: 1rem; font-weight: 400; font-family: var(--mono); margin-left: 1rem; }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .skill-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .skill-icon { font-family: var(--mono); font-size: 1.5rem; color: var(--accent); margin-bottom: 0.5rem; }
+  .skill-name { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .skill-level { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+  .skill-bar {
+    height: 3px; background: var(--border);
+    border-radius: 99px; margin-top: 0.75rem;
+    overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%; background: var(--accent);
+    border-radius: 99px;
+    animation: fillBar 1.5s ease forwards;
+  }
+  @keyframes fillBar { from { width: 0; } }
+
+  /* PROJECTS */
+  .projects-grid { display: grid; gap: 1.5rem; }
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .project-card:hover::before { opacity: 1; }
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
+  .project-title { font-size: 1.1rem; font-weight: 700; }
+  .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+  .tag.purple { border-color: #7c3aed; color: #a78bfa; }
+  .tag.green { border-color: var(--green); color: var(--green); }
+  .project-desc { color: var(--muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 1rem; }
+  .project-features { list-style: none; }
+  .project-features li {
+    font-size: 0.85rem; color: var(--muted);
+    padding: 0.2rem 0;
+    font-family: var(--mono);
+  }
+  .project-features li::before { content: '> '; color: var(--accent); }
+
+  /* CONTACT */
+  .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+    text-decoration: none;
+    color: var(--text);
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .contact-icon {
+    width: 40px; height: 40px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--mono); font-size: 0.9rem; color: var(--accent);
+    flex-shrink: 0;
+  }
+  .contact-label { font-size: 0.75rem; color: var(--muted); font-family: var(--mono); letter-spacing: 0.1em; }
+  .contact-value { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 0;
+    text-align: center;
+  }
+  footer p { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+  footer span { color: var(--accent); }
+
+  .divider { height: 1px; background: var(--border); margin: 0; }
+
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-logo"><span>// </span>jagdish.joshi</div>
+    <ul>
+      <li><a href="#about">about</a></li>
+      <li><a href="#skills">skills</a></li>
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#contact">contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero" id="about">
+  <div class="container">
+    <div class="hero-tag">CS Student @ Youngstown State University</div>
+    <h1>Hi, I'm <span class="name-accent">Jagdish<br>Joshi</span></h1>
+    <div class="hero-subtitle">
+      <span id="typed"></span><span class="cursor"></span>
+    </div>
+    <p class="hero-desc">
+      Computer Science student based in Youngstown, Ohio. Passionate about building clean, efficient software. Currently sharpening my skills in Java OOP, C++, and web technologies.
+    </p>
+    <div class="hero-btns">
+      <a href="mailto:jagdishjoshi1101@gmail.com" class="btn btn-primary">Get In Touch</a>
+      <a href="#projects" class="btn btn-outline">View Projects</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Languages</span>
+      </div>
+      <div>
+        <span class="stat-num">2+</span>
+        <span class="stat-label">Projects</span>
+      </div>
+      <div>
+        <span class="stat-num">YSU</span>
+        <span class="stat-label">University</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="skills">
+  <div class="container fade-in">
+    <div class="section-tag">// 02. what i know</div>
+    <h2>Skills <span>& Technologies</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon">{ }</div>
+        <div class="skill-name">Java</div>
+        <div class="skill-level">OOP · Classes · Inheritance</div>
+        <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">C++</div>
+        <div class="skill-name">C++</div>
+        <div class="skill-level">Procedural · Memory Management</div>
+        <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">C</div>
+        <div class="skill-name">C Programming</div>
+        <div class="skill-level">Systems · Pointers · Structs</div>
+        <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon">&lt;/&gt;</div>
+        <div class="skill-name">HTML</div>
+        <div class="skill-level">Web · Structure · Markup</div>
+        <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="projects">
+  <div class="container fade-in">
+    <div class="section-tag">// 03. what i've built</div>
+    <h2>Projects <span>& Work</span></h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Instrument Collection Manager</div>
+          <div class="project-tags">
+            <span class="tag">Java</span>
+            <span class="tag purple">OOP</span>
+            <span class="tag green">CSIS 3701</span>
+          </div>
+        </div>
+        <p class="project-desc">
+          A console-based Java application that manages a collection of musical instruments using object-oriented principles. Supports String, Brass, and Woodwind categories with full input validation.
+        </p>
+        <ul class="project-features">
+          <li>Abstract class hierarchy with Instrument base class</li>
+          <li>Tunable interface for polymorphic behavior</li>
+          <li>Dynamic sound level calculation per instrument type</li>
+          <li>ArrayList-based collection with menu-driven UI</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Book File Reader & Validator</div>
+          <div class="project-tags">
+            <span class="tag">Java</span>
+            <span class="tag purple">OOP</span>
+            <span class="tag green">CSIS 3701</span>
+          </div>
+        </div>
+        <p class="project-desc">
+          A file-parsing Java program that reads tab-delimited book records, validates each field, applies configurable discounts, and reports both valid items and error lines with line numbers.
+        </p>
+        <ul class="project-features">
+          <li>Custom InvalidRecordException for error handling</li>
+          <li>Discountable interface with clamped discount logic</li>
+          <li>Retail pricing with 15% margin calculation</li>
+          <li>Separate valid/error ArrayList reporting</li>
+        </ul>
+      </div>
+
+      <div class="project-card" style="border-style: dashed; opacity: 0.6;">
+        <div class="project-header">
+          <div class="project-title">More Projects Coming Soon...</div>
+          <div class="project-tags">
+            <span class="tag">C++</span>
+            <span class="tag">HTML</span>
+          </div>
+        </div>
+        <p class="project-desc">
+          C++ and HTML projects will be added here soon. Stay tuned!
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="container fade-in">
+    <div class="section-tag">// 04. get in touch</div>
+    <h2>Contact <span>& Links</span></h2>
+    <div class="contact-grid">
+      <a href="mailto:jagdishjoshi1101@gmail.com" class="contact-card">
+        <div class="contact-icon">@</div>
+        <div>
+          <div class="contact-label">EMAIL</div>
+          <div class="contact-value">jagdishjoshi1101@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/jagdish-joshi-a7a227334" target="_blank" class="contact-card">
+        <div class="contact-icon">in</div>
+        <div>
+          <div class="contact-label">LINKEDIN</div>
+          <div class="contact-value">jagdish-joshi</div>
+        </div>
+      </a>
+      <div class="contact-card">
+        <div class="contact-icon">#</div>
+        <div>
+          <div class="contact-label">LOCATION</div>
+          <div class="contact-value">Youngstown, Ohio, USA</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon">U</div>
+        <div>
+          <div class="contact-label">UNIVERSITY</div>
+          <div class="contact-value">Youngstown State University</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Designed & Built by <span>Jagdish Joshi</span> · 2025</p>
+    <p style="margin-top:0.5rem;">CSIS 3701 · Youngstown State University</p>
+  </div>
+</footer>
+
+<script>
+const phrases = ['CS Student @ YSU', 'Java Developer', 'C++ Programmer', 'Web Developer', 'Problem Solver'];
+let pi = 0, ci = 0, deleting = false;
+const el = document.getElementById('typed');
+function type() {
+  const word = phrases[pi];
+  if (!deleting) {
+    el.textContent = word.slice(0, ++ci);
+    if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
+  } else {
+    el.textContent = word.slice(0, --ci);
+    if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+  }
+  setTimeout(type, deleting ? 60 : 100);
+}
+type();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
